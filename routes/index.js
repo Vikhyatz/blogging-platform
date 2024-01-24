@@ -131,27 +131,6 @@ router.get("/logout", function (req, res) {
   });
 })
 
-router.get('/allusers', async function (req, res) {
-  let allusers = await userModel.find()
-  res.send(allusers)
-})
-
-router.get('/allposts', async function (req, res) {
-  let allposts = await postModel.find().populate('user')
-  res.send(allposts)
-})
-
-router.get('/deletepost', async function (req, res) {
-  let deletepost = await postModel.deleteMany()
-  res.send(deletepost)
-})
-
-router.get('/deleteall', async function (req, res) {
-  let deleteduser = await userModel.deleteMany()
-  res.send(deleteduser)
-})
-
-
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next()
   res.redirect("/")
