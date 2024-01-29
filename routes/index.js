@@ -149,16 +149,6 @@ router.get('/allposts', async function (req, res) {
   res.send(allposts)
 })
 
-router.get('/deletepost', async function (req, res) {
-  let deletepost = await postModel.deleteMany()
-  res.send(deletepost)
-})
-
-router.get('/deleteall', async function (req, res) {
-  let deleteduser = await userModel.deleteMany()
-  res.send(deleteduser)
-})
-
 
 function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) return next()
