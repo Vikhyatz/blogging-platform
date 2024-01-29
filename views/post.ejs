@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/60734bdbf3.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/stylesheets/post.css">
+    <title>Secrets | Feed</title>
+</head>
+
+<body>
+
+    <%- include('partials/sidenav') %>
+
+        <main>
+            <div id="topBar">
+                <div id="hamburger"><i class="fa-solid fa-bars"></i></div>
+                <h3>Feed</h3>
+            </div>
+
+            <div id="main">
+                <div id="mainFeed">
+
+
+                    <h2>Post:</h2>
+                    <div class="note" id="<%= postContent._id %>">
+                        <div class="noteUserInfo">
+                            <div class="noteimg">
+                                <img src="<%= postContent.user.profilePicture %>" alt="profile photo">
+                            </div>
+                            <h4>
+                                <%= postContent.user.username %>
+                            </h4>
+                        </div>
+                        <p>
+                            <%= postContent.content %>
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="line"></div>
+
+                <div id="createPostContainer">
+                    <h3>Write a Comment:</h3>
+                    <div id="postimg">
+                        <img src="<%= user.profilePicture %>" alt="profile photo">
+                    </div>
+                    <form action="/comment" method="post">
+                        <textarea id="commentContent" name="commentContent"
+                            placeholder="Reply to this post?"></textarea>
+                            <input id="postIdHiddenInput" type="text" name="postId" value="<%= postContent._id %>">
+                        <button id="submitComment" type="submit">Post</button>
+                    </form>
+                </div>
+
+                <div class="line"></div>
+
+                <div id="comments">
+                    <h2>Comments:</h2>
+
+                    <% postContent.comments.reverse().forEach(function(comment) { %>
+                        <div class="comment">
+                            <div class="commentUserInfo">
+                                <div class="commentUserimg">
+                                    <img src="<%= comment.commentUserPicture %>" alt="profile photo">
+                                </div>
+                                <h4>
+                                    <%= comment.commentUserName %>
+                                </h4>
+                            </div>
+                            <p>
+                                <%= comment.commentContent %>
+                            </p>
+                        </div>
+                    <% }) %>
+
+                </div>
+
+            </div>
+        </main>
+
+</body>
+<script>
+    let hamburger = document.getElementById('hamburger')
+    let sideNav = document.getElementById('sideNav')
+    let closeNav = document.getElementById('close')
+
+    hamburger.addEventListener('click', () => {
+        sideNav.style.left = '0'
+    })
+
+    closeNav.addEventListener('click', () => {
+        sideNav.style.left = '-600px'
+    })
+
+    // let form = document.querySelector('form')
+    // form.addEventListener('submit', () => {
+    //     let note = document.getElementById('note')
+    //     let postId = note.getAttribute('id')
+        
+    //     axios.post(`/comment/${postId}`)
+    //         .then(function (response) {
+    //             console.log(response);
+    //         })
+    // })
+</script>
+
+</html>
