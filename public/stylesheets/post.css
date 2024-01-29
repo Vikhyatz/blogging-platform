@@ -266,7 +266,7 @@ form {
 }
 
 @media only screen and (max-width: 530px) {
-    #mainFeed {
+    #mainFeed, #comments {
         width: 100%;
         border-inline: 0;
     }
